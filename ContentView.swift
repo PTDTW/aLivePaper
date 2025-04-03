@@ -12,6 +12,10 @@ struct ContentView: View {
         Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
     }
     
+    private var buildNumber: String {
+        Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
+    }
+    
     var body: some View {
         VStack {
             HStack(spacing: 30) {
@@ -113,7 +117,7 @@ struct ContentView: View {
             .padding(15)
             .background(.clear)
             
-            Text("Version \(appVersion)")
+            Text("Version \(appVersion) (\(buildNumber))")
                 .font(.system(size: 12))
                 .foregroundColor(.secondary)
                 .padding(.bottom, 8)
