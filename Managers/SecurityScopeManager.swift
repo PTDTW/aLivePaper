@@ -42,4 +42,14 @@ class SecurityScopeManager {
             return false
         }
     }
+
+    /// ✅ **新增 `startAccessingSecurityScopedResource(at:)` 方法**
+    func startAccessingSecurityScopedResource(at url: URL) -> Bool {
+        if url.startAccessingSecurityScopedResource() {
+            return true
+        } else {
+            // 如果無法存取，嘗試透過書籤還原
+            return restoreSecurityScopeAccess(for: url.path)
+        }
+    }
 }

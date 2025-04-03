@@ -116,4 +116,30 @@ class DatabaseManager {
         sqlite3_finalize(statement)
         return records
     }
+    
+    func getLastWallpaper() -> WallpaperRecord? {
+        let query = "SELECT * FROM wallpapers ORDER BY lastUsed DESC LIMIT 1"
+        var statement: OpaquePointer?
+        var record: WallpaperRecord?
+        
+        if sqlite3_prepare_v2(db, query, -1, &statement, nil) == SQLITE_OK {
+            if sqlite3_step(statement) == SQLITE_ROW {
+                let id = sqlite3_column_int64(statement, 0)
+                let path = String(cString: sqlite3_column_text(statement, 1))
+                let fileName = String(cString: sqlite3_column_text(statement, 2))
+                let timestamp = sqlite3_column_double(statement, 3)
+                let volume = Float(sqlite3_column_double(statement, 4))
+                
+                record = WallpaperRecord(
+                    id: id,
+                    path: path,
+                    fileName: fileName,
+                    lastUsed: Date(timeIntervalSince1970: timestamp),
+                    volume: volume
+                )
+            }
+        }
+        sqlite3_finalize(statement)
+        return record
+    }
 }

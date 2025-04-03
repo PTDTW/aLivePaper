@@ -47,13 +47,28 @@ struct HistoryView: View {
                                 .strokeBorder(.quaternary, lineWidth: 1)
                         )
                         .onTapGesture {
+                            let url = URL(fileURLWithPath: wallpaper.path)
                             withAnimation {
                                 LiveWallpaperController.shared.setWallpaper(
-                                    with: URL(fileURLWithPath: wallpaper.path),
+                                    with: url,
                                     volume: wallpaper.volume
                                 )
-                                UserDefaults.standard.set(wallpaper.path, forKey: "lastWallpaperPath")
-                                UserDefaults.standard.set(wallpaper.volume, forKey: "lastWallpaperVolume")
+                                
+                                DatabaseManager.shared.saveWallpaper(
+                                    path: wallpaper.path,
+                                    fileName: wallpaper.fileName,
+                                    volume: wallpaper.volume
+                                )
+                                
+                                // 發送通知以更新主介面
+                                NotificationCenter.default.post(
+                                    name: .wallpaperSelected,
+                                    object: nil,
+                                    userInfo: [
+                                        "url": url,
+                                        "volume": wallpaper.volume
+                                    ]
+                                )
                             }
                         }
                     }
@@ -118,4 +133,5 @@ struct HistoryView: View {
 
 extension Notification.Name {
     static let wallpaperAdded = Notification.Name("wallpaperAdded")
+    static let wallpaperSelected = Notification.Name("wallpaperSelected")
 }
