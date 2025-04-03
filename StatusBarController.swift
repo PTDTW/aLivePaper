@@ -14,21 +14,14 @@ class MainWindow: NSWindow {
 }
 
 // 讓 StatusBarController 繼承 NSObject 並符合 NSWindowDelegate 協議
-class StatusBarController: NSObject, ObservableObject, NSWindowDelegate, SPUUpdaterDelegate {
+class StatusBarController: NSObject, ObservableObject, NSWindowDelegate {
     private var statusItem: NSStatusItem!
     private var mainWindow: MainWindow?
-    private var updater: SPUUpdater!
-    private var updaterController: SPUStandardUpdaterController!
+    private var updater = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil).updater
     
     override init() {
-        // Initialize properties before super.init()
-        updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
+//        sparkle = SparkleController()
         super.init()
-        
-        // Initialize properties that require self after super.init()
-        updaterController = SPUStandardUpdaterController(startingUpdater: true, updaterDelegate: self, userDriverDelegate: nil)
-        updater = updaterController.updater
-        
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         if let button = statusItem.button {
             button.image = NSImage(systemSymbolName: "star.fill", accessibilityDescription: "Live Wallpaper")
@@ -102,18 +95,6 @@ class StatusBarController: NSObject, ObservableObject, NSWindowDelegate, SPUUpda
     // 更新檢查方法
     @objc func checkForUpdates() {
         updater.checkForUpdates()
-    }
-
-    // SPUUpdaterDelegate methods
-    func updater(_ updater: SPUUpdater, didEncounterError error: Error) {
-        DispatchQueue.main.async {
-            let alert = NSAlert()
-            alert.messageText = "更新錯誤"
-            alert.informativeText = "檢查更新時發生錯誤：\(error.localizedDescription)"
-            alert.alertStyle = .warning
-            alert.addButton(withTitle: "確定")
-            alert.runModal()
-        }
     }
 
     @objc func quitApp() {
