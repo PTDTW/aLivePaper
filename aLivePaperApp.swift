@@ -5,6 +5,15 @@ struct aLivePaperApp: App {
     @StateObject private var statusBarController = StatusBarController()
     
     init() {
+        // 检查系统版本
+        let osVersion = ProcessInfo.processInfo.operatingSystemVersion
+        if osVersion.majorVersion < 12 {  // macOS 12 Monterey
+            NSAlert.showWarning(
+                title: "系統版本過低",
+                message: "此應用程式需要 macOS 12.0 (Monterey) 或更新版本。"
+            )
+        }
+        
         // 將應用設置為 accessory 模式，隱藏在 Dock 中
         NSApplication.shared.setActivationPolicy(.accessory)
     }
@@ -33,5 +42,15 @@ struct aLivePaperApp: App {
                     NSApplication.shared.setActivationPolicy(.accessory)
                 }
         }
+    }
+}
+
+extension NSAlert {
+    static func showWarning(title: String, message: String) {
+        let alert = NSAlert()
+        alert.messageText = title
+        alert.informativeText = message
+        alert.alertStyle = .warning
+        alert.runModal()
     }
 }
