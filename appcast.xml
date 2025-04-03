@@ -3,12 +3,12 @@
     <channel>
         <title>aLivePaper</title>
         <item>
-            <title>0.0.1</title>
-            <pubDate>Wed, 02 Apr 2025 22:06:01 +0800</pubDate>
-            <sparkle:version>Beta0.1</sparkle:version>
-            <sparkle:shortVersionString>0.0.1</sparkle:shortVersionString>
+            <title>0.0.2</title>
+            <pubDate>Thu, 03 Apr 2025 10:45:26 +0800</pubDate>
+            <sparkle:version>0.0.2-beta1.0</sparkle:version>
+            <sparkle:shortVersionString>0.0.2</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/PTDTW/aLivePaper/releases/download/0.0.1-beta1.0/aLivePaper-0.0.1-beta1.0.zip" length="2802432" type="application/octet-stream" sparkle:edSignature="+np/v6GixtyV5uOub+qzaM+tocswm7zhpABNo9+R81CAX156aqysARyl/PBn3SaRsJoSvUNgj+s5PGMYjfzBDQ=="/>
+            <enclosure url="https://raw.githubusercontent.com/PTDTW/aLivePaper/main/aLivePaper-0.0.2-beta1.0.zip" length="2805703" type="application/octet-stream" sparkle:edSignature="q9OYJhekNF7cLFD4bWgmxUXWTNl6zRyZqJsoxsd7ajDRGn2KVKiIZsKI54mLjHswL1CC0U7Tj+1ZuBAV0ZXXBQ=="/>
         </item>
     </channel>
 </rss>
