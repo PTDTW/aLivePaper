@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>SUFeedURL</key>
-	<string>https://github.com/pTDTW/aLivePaper/appcast.xml</string>
+	<string>https://raw.githubusercontent.com/PTDTW/aLivePaper/main/appcast.xml</string>
 	<key>SUPublicEDKey</key>
 	<string>2kJKGlE6iuwfroCdMBqIPd1otAdWqDMDvirpmsOOEe8=</string>
 	<key>UILaunchScreen</key>
